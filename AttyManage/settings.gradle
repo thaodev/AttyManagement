@@ -1,0 +1,3 @@
+rootProject.name = 'AttyManage'
+
+includeFlat 'JPAAttyManage'
