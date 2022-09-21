@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
@@ -50,6 +51,15 @@ If no credentials are sent, no Principal will be created.
 	     return null;
 	  }
 	  return authService.getUserByUsername(principal.getName());
+	}
+	
+	@GetMapping("test/users/{userId}")
+	public User getUserForTest (@PathVariable Integer userId, HttpServletResponse res) {
+		User user = authService.getUserById(userId);
+		if (user == null) {
+			res.setStatus(404);
+		}
+		return user;
 	}
 
 }
